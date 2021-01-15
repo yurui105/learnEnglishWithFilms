@@ -1,0 +1,15 @@
+<RCC>
+    <qresource prefix="/icon">
+        <file>image/icon/github.png</file>
+        <file>image/icon/new.png</file>
+        <file>image/icon/open.png</file>
+        <file>image/icon/patron.png</file>
+    </qresource>
+    <qresource prefix="/patron">
+        <file>image/patron/alipay.jpg</file>
+        <file>image/patron/wechat.png</file>
+    </qresource>
+    <qresource prefix="/logo">
+        <file>image/logo/logo.png</file>
+    </qresource>
+</RCC>

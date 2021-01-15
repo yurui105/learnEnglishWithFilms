@@ -1,0 +1,418 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>WelcomePage</class>
+ <widget class="QWidget" name="WelcomePage">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>523</width>
+    <height>481</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(255, 255, 255);
+font: 12pt &quot;楷体&quot;;</string>
+  </property>
+  <layout class="QHBoxLayout" name="horizontalLayout_2">
+   <item>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <layout class="QHBoxLayout" name="topLayout">
+       <property name="leftMargin">
+        <number>10</number>
+       </property>
+       <property name="rightMargin">
+        <number>10</number>
+       </property>
+       <property name="bottomMargin">
+        <number>10</number>
+       </property>
+       <item>
+        <widget class="QLabel" name="logoLabel">
+         <property name="minimumSize">
+          <size>
+           <width>259</width>
+           <height>128</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>259</width>
+           <height>128</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-image: url(:/logo/image/logo/logo.png);
+background-repeat: no-repeat;
+background-position: left top;</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <layout class="QVBoxLayout" name="textLayout">
+         <item>
+          <widget class="QLabel" name="englishTittleLabel">
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>43</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">font: 13pt &quot;楷体&quot;;</string>
+           </property>
+           <property name="text">
+            <string>LEARN ENGLISH WITH FILMS</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="chaineseTittleLabel">
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>43</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">font: 13pt &quot;楷体&quot;;</string>
+           </property>
+           <property name="text">
+            <string>最佳观影学英语软件</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="versionLabel">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>43</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">font: 10pt &quot;楷体&quot;;</string>
+           </property>
+           <property name="text">
+            <string>CURENT VERSION:0.0.0</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <item>
+        <layout class="QVBoxLayout" name="leftLayout">
+         <item>
+          <layout class="QVBoxLayout" name="aboutLayout">
+           <item>
+            <widget class="QPushButton" name="githubButton">
+             <property name="minimumSize">
+              <size>
+               <width>200</width>
+               <height>40</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>200</width>
+               <height>80</height>
+              </size>
+             </property>
+             <property name="layoutDirection">
+              <enum>Qt::LeftToRight</enum>
+             </property>
+             <property name="autoFillBackground">
+              <bool>false</bool>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QPushButton {
+    font-family: &quot;楷体&quot;;
+    font-size: 17px;
+    color: #000000;
+
+    border-style: solid;
+    border-width: 1px;
+    border-color: #a39e9e;
+    border-radius: 20px;
+
+    background-color: #ffffff;
+}
+QPushButton:hover{
+	color: #ffffff;
+    background-color: #005792;
+}
+QPushButton:pressed{
+	color: #ffffff;
+    background-color: #13334c;
+}</string>
+             </property>
+             <property name="text">
+              <string>Contribu on Github</string>
+             </property>
+             <property name="icon">
+              <iconset resource="resource.qrc">
+               <normaloff>:/icon/image/icon/github.png</normaloff>:/icon/image/icon/github.png</iconset>
+             </property>
+             <property name="autoRepeat">
+              <bool>false</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="patronButton">
+             <property name="minimumSize">
+              <size>
+               <width>170</width>
+               <height>40</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>170</width>
+               <height>80</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QPushButton {
+    font-family: &quot;楷体&quot;;
+    font-size: 17px;
+    color: #000000;
+
+    border-style: solid;
+    border-width: 1px;
+    border-color: #a39e9e;
+    border-radius: 20px;
+
+    background-color: #ffffff;
+}
+QPushButton:hover{
+	color: #ffffff;
+    background-color: #005792;
+}
+QPushButton:pressed{
+	color: #ffffff;
+    background-color: #13334c;
+}</string>
+             </property>
+             <property name="text">
+              <string>Become a Patron</string>
+             </property>
+             <property name="icon">
+              <iconset resource="resource.qrc">
+               <normaloff>:/icon/image/icon/patron.png</normaloff>:/icon/image/icon/patron.png</iconset>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QVBoxLayout" name="newsLayout">
+           <item>
+            <widget class="QLabel" name="label">
+             <property name="text">
+              <string>News:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QGroupBox" name="groupBox">
+             <property name="minimumSize">
+              <size>
+               <width>180</width>
+               <height>100</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">border-style: solid;
+border-width: 1px;
+border-color: #a39e9e;
+border-radius: 20px;</string>
+             </property>
+             <property name="title">
+              <string/>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QVBoxLayout" name="proojectLayout">
+           <item>
+            <widget class="QPushButton" name="newProjectButton">
+             <property name="minimumSize">
+              <size>
+               <width>100</width>
+               <height>40</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>200</width>
+               <height>80</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QPushButton {
+    font-family: &quot;楷体&quot;;
+    font-size: 17px;
+    color: #000000;
+
+    border-style: solid;
+    border-width: 1px;
+    border-color: #a39e9e;
+    border-radius: 20px;
+
+    background-color: #ffffff;
+}
+QPushButton:hover{
+	color: #ffffff;
+    background-color: #005792;
+}
+QPushButton:pressed{
+	color: #ffffff;
+    background-color: #13334c;
+}</string>
+             </property>
+             <property name="text">
+              <string>新建项目</string>
+             </property>
+             <property name="icon">
+              <iconset resource="resource.qrc">
+               <normaloff>:/icon/image/icon/new.png</normaloff>:/icon/image/icon/new.png</iconset>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="openProjectButton">
+             <property name="minimumSize">
+              <size>
+               <width>100</width>
+               <height>40</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>200</width>
+               <height>80</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QPushButton {
+    font-family: &quot;楷体&quot;;
+    font-size: 17px;
+    color: #000000;
+
+    border-style: solid;
+    border-width: 1px;
+    border-color: #a39e9e;
+    border-radius: 20px;
+
+    background-color: #ffffff;
+}
+QPushButton:hover{
+	color: #ffffff;
+    background-color: #005792;
+}
+QPushButton:pressed{
+	color: #ffffff;
+    background-color: #13334c;
+}</string>
+             </property>
+             <property name="text">
+              <string>打开项目</string>
+             </property>
+             <property name="icon">
+              <iconset resource="resource.qrc">
+               <normaloff>:/icon/image/icon/open.png</normaloff>:/icon/image/icon/open.png</iconset>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QVBoxLayout" name="recentLayout">
+         <item>
+          <widget class="QLabel" name="label_2">
+           <property name="maximumSize">
+            <size>
+             <width>200</width>
+             <height>20</height>
+            </size>
+           </property>
+           <property name="layoutDirection">
+            <enum>Qt::LeftToRight</enum>
+           </property>
+           <property name="text">
+            <string>最近打开项目</string>
+           </property>
+           <property name="scaledContents">
+            <bool>false</bool>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignBottom|Qt::AlignHCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QGroupBox" name="recentProjectBox">
+           <property name="minimumSize">
+            <size>
+             <width>100</width>
+             <height>200</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>200</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="layoutDirection">
+            <enum>Qt::LeftToRight</enum>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">border-style: solid;
+border-width: 1px;
+border-color: #a39e9e;
+border-radius: 20px;</string>
+           </property>
+           <property name="title">
+            <string/>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="resource.qrc"/>
+ </resources>
+ <connections/>
+</ui>
