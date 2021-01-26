@@ -9,17 +9,22 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    NewProjectWizard/newprojectwizard.cpp \
+    config/newproject.cpp \
     main.cpp \
     mainwindow.cpp \
     patronpage.cpp \
     welcomepage.cpp
 
 HEADERS += \
+    NewProjectWizard/newprojectwizard.h \
+    config/newproject.h \
     mainwindow.h \
     patronpage.h \
     welcomepage.h
 
 FORMS += \
+    NewProjectWizard/newprojectwizard.ui \
     mainwindow.ui \
     patronpage.ui \
     welcomepage.ui
@@ -34,3 +39,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 RESOURCES += \
     resource.qrc
+
+DISTFILES += \
+    config/LEWFconfig.json
