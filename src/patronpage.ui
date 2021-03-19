@@ -24,7 +24,7 @@
 border-style: solid;
 border-width: 2px;
 border-color: #a39e9e;
-border-radius: 20px;
+border-radius: 15px;
 }</string>
      </property>
      <property name="title">

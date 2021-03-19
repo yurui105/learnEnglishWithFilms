@@ -9,25 +9,31 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    NewProjectWizard/importfiles.cpp \
-    NewProjectWizard/newprojectwizard.cpp \
-    config/newproject.cpp \
+    NewProjectWizard/firstpage.cpp \
+    NewProjectWizard/secondpage.cpp \
+    NewProjectWizard/wizard.cpp \
+    config/newproject_config.cpp \
+    costomMessageBox/messagebox.cpp \
+    fileOperate/fileoperate.cpp \
     main.cpp \
     mainwindow.cpp \
     patronpage.cpp \
     welcomepage.cpp
 
 HEADERS += \
-    NewProjectWizard/importfiles.h \
-    NewProjectWizard/newprojectwizard.h \
-    config/newproject.h \
+    NewProjectWizard/firstpage.h \
+    NewProjectWizard/secondpage.h \
+    NewProjectWizard/wizard.h \
+    config/newproject_config.h \
+    costomMessageBox/messagebox.h \
+    fileOperate/fileoperate.h \
     mainwindow.h \
     patronpage.h \
     welcomepage.h
 
 FORMS += \
-    NewProjectWizard/importfiles.ui \
-    NewProjectWizard/newprojectwizard.ui \
+    NewProjectWizard/firstpage.ui \
+    NewProjectWizard/secondpage.ui \
     mainwindow.ui \
     patronpage.ui \
     welcomepage.ui

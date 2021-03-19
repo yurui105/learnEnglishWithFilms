@@ -7,6 +7,7 @@
 #include<QPushButton>
 
 #include"patronpage.h"
+#include"NewProjectWizard/firstpage.h"
 
 namespace Ui {
 class WelcomePage;
@@ -22,7 +23,9 @@ public:
 
 private:
     Ui::WelcomePage *ui;
-    PatronPage *patronPage;
+    PatronPage *patronPage;//赞赏界面
+    FirstPage *newProjectPage;//新建项目界面
+
 
     //配置信号槽
     void makeConnect();
@@ -32,6 +35,8 @@ public slots:
     void openGithubURL();
     //赞助界面
     void openPatron();
+    //新建项目
+    void newProject();
 };
 
 #endif // WELCOMEPAGE_H

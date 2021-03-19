@@ -6,9 +6,21 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>523</width>
-    <height>481</height>
+    <width>700</width>
+    <height>500</height>
    </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>700</width>
+    <height>500</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>Form</string>
@@ -235,7 +247,7 @@ QPushButton:pressed{
             <widget class="QGroupBox" name="groupBox">
              <property name="minimumSize">
               <size>
-               <width>180</width>
+               <width>310</width>
                <height>100</height>
               </size>
              </property>
@@ -243,7 +255,8 @@ QPushButton:pressed{
               <string notr="true">border-style: solid;
 border-width: 1px;
 border-color: #a39e9e;
-border-radius: 20px;</string>
+border-radius: 20px;
+margin-right: 30px;</string>
              </property>
              <property name="title">
               <string/>
@@ -349,13 +362,26 @@ QPushButton:pressed{
         </layout>
        </item>
        <item>
+        <spacer name="horizontalSpacer">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
         <layout class="QVBoxLayout" name="recentLayout">
          <item>
           <widget class="QLabel" name="label_2">
            <property name="maximumSize">
             <size>
-             <width>200</width>
-             <height>20</height>
+             <width>111111</width>
+             <height>30</height>
             </size>
            </property>
            <property name="layoutDirection">
@@ -368,7 +394,7 @@ QPushButton:pressed{
             <bool>false</bool>
            </property>
            <property name="alignment">
-            <set>Qt::AlignBottom|Qt::AlignHCenter</set>
+            <set>Qt::AlignCenter</set>
            </property>
           </widget>
          </item>
@@ -376,13 +402,13 @@ QPushButton:pressed{
           <widget class="QGroupBox" name="recentProjectBox">
            <property name="minimumSize">
             <size>
-             <width>100</width>
+             <width>250</width>
              <height>200</height>
             </size>
            </property>
            <property name="maximumSize">
             <size>
-             <width>200</width>
+             <width>350</width>
              <height>16777215</height>
             </size>
            </property>
@@ -393,7 +419,9 @@ QPushButton:pressed{
             <string notr="true">border-style: solid;
 border-width: 1px;
 border-color: #a39e9e;
-border-radius: 20px;</string>
+border-radius: 20px;
+margin-left: 30px;
+margin-right: 30px;</string>
            </property>
            <property name="title">
             <string/>

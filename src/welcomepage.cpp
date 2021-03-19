@@ -28,10 +28,18 @@ void WelcomePage::openPatron(){
 
 }
 
+void WelcomePage::newProject(){
+    newProjectPage = new FirstPage(this);
+
+    newProjectPage->show();
+}
+
 void WelcomePage::makeConnect(){
     //绑定打开github按钮
     QObject::connect(ui->githubButton,&QPushButton::clicked,this,&WelcomePage::openGithubURL);
     //绑定赞助按钮
     QObject::connect(ui->patronButton,&QPushButton::clicked,this,&WelcomePage::openPatron);
 
+    //新建项目按钮
+    QObject::connect(ui->newProjectButton,&QPushButton::clicked,this,&WelcomePage::newProject);
 }

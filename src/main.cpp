@@ -1,15 +1,15 @@
 #include "mainwindow.h"
 #include"welcomepage.h"
 
-#include"NewProjectWizard/importfiles.h"
-#include"NewProjectWizard/newprojectwizard.h"
+#include"NewProjectWizard/secondpage.h"
+#include"NewProjectWizard/firstpage.h"
 
 #include <QApplication>
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    ImportFiles w;
+    WelcomePage w;
     w.show();
     return a.exec();
 }
