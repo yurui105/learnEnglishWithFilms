@@ -44,3 +44,23 @@ QString FileOperate::openFile(QString filePath,QString fileType)
     return fileName;
 
 }
+
+bool FileOperate::createFile(QString name,QString type,QString path){
+    //判断文件是否已经存在，存在则返回创建失败
+    QFileInfo fileInfo(path+"/"+name+"."+type);
+    if(fileInfo.isFile()){
+        return false;
+    }
+
+    //检查路径是否存在，不存在则创建目录
+    QDir dir(path);
+    if(!dir.exists()){
+        dir.mkdir(path);
+    }
+
+    //创建文件
+    QFile file(path+"/"+name+"."+type);
+    file.open(QIODevice::WriteOnly);
+    file.close();
+    return true;
+}

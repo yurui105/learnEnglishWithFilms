@@ -6,6 +6,7 @@
 #include <QPushButton>
 
 #include "fileOperate/fileoperate.h"
+#include "NewProjectWizard/wizard.h"
 #include "mainwindow.h"
 
 namespace Ui {
@@ -23,6 +24,10 @@ public:
 private:
     Ui::SecondPage *ui;
     MainWindow *mainWindow;
+
+    //标记字幕以及音频是否包含在视频中
+    bool audioInVideo;
+    bool subttileInVideo;
 
     void make_connect();
 

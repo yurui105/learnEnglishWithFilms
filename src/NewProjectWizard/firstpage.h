@@ -12,6 +12,7 @@
 #include "costomMessageBox/messagebox.h"
 #include "NewProjectWizard/secondpage.h"
 #include "fileOperate/fileoperate.h"
+#include "NewProjectWizard/wizard.h"
 
 
 
@@ -32,7 +33,6 @@ private:
     void make_connect();
     void init_edit();//初始化输入框内容
     Ui::FirstPage *ui;
-    SecondPage *importFilePage = nullptr;
 
 private slots:
     //下一步按钮

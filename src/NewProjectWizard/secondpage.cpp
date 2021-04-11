@@ -3,16 +3,19 @@
 
 SecondPage::SecondPage(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::SecondPage)
+    ui(new Ui::SecondPage),
+    audioInVideo(true),
+    subttileInVideo(true)
 {
     ui->setupUi(this);
+    //隐藏菜单栏
+    this->setWindowFlags(Qt::FramelessWindowHint);
     make_connect();
 }
 
 SecondPage::~SecondPage()
 {
     delete ui;
-    delete mainWindow;
 }
 
 
@@ -35,17 +38,27 @@ void SecondPage::on_open_audio_button_clicked()
 {
     QString fileName = FileOperate::openFile(nullptr,FileOperate::AUDIO_FILE);
     ui->audioComboBox->addItem(fileName);
+    audioInVideo = false;
 }
 
 void SecondPage::on_open_subtittle_button_clicked()
 {
     QString fileName = FileOperate::openFile(nullptr,FileOperate::SUBTITTLE_FILE);
     ui->subtitleComboBox->addItem(fileName);
+    subttileInVideo = false;
 }
 
 void SecondPage::on_create_project_button_clicked()
 {
+    NewProjectWizard &wizard = NewProjectWizard::getInstance();
+    wizard.setVideoPath(ui->fileNameEdit->text());
+    wizard.setAudioPath(audioInVideo,ui->audioComboBox->currentText());
+    wizard.setSubtittlePath(subttileInVideo,ui->subtitleComboBox->currentText());
+
+    wizard.savaData();
+    wizard.closeWizard();
+
+
     mainWindow = new MainWindow();
-    this->close();
     mainWindow->show();
 }

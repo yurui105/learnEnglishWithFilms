@@ -12,13 +12,11 @@ FirstPage::FirstPage(QWidget *parent) :
     //初始化信号槽
     make_connect();
     init_edit();//初始化输入框内容
-
 }
 
 FirstPage::~FirstPage()
 {
     delete ui;
-    delete importFilePage;
 }
 
 void FirstPage::on_next_step_clicked(){
@@ -30,18 +28,32 @@ void FirstPage::on_next_step_clicked(){
         return;
     }
 
-    //检测下一个页面是否已经存在
-    if(importFilePage==nullptr){
-        importFilePage = new SecondPage(this);
-        importFilePage->show();
-    }else{
-        importFilePage->show();
-    }
+//    //检测下一个页面是否已经存在
+//    if(importFilePage==nullptr){
+//        importFilePage = new SecondPage(this);
+//        importFilePage->show();
+//    }else{
+//        importFilePage->show();
+//    }
+    NewProjectWizard &wizard = NewProjectWizard::getInstance();
+    wizard.setProjectName(ui->projectNameEdit->text());
+    wizard.setProjectPath(ui->projectPositionEdit->text());
+
+    NewProjectWizard::getInstance().nextPage();
+
 
 }
 void FirstPage::on_choose_project_path_clicked(){
     //打开选择文件对话框获取存储路径
     QString projectPath = FileOperate::openDirectory();
+
+    //判断是否输入项目名字，如果输入了项目名字，则在路径中加入项目名字
+    QString projectName = ui->projectNameEdit->text();
+    if(!projectName.isEmpty()){
+        projectPath+=("/"+projectName);
+    }
+
+    //刷新输入框的显示
     ui->projectPositionEdit->setText(projectPath);
 }
 

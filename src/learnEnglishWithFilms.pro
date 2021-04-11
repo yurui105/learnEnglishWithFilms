@@ -15,6 +15,7 @@ SOURCES += \
     config/newproject_config.cpp \
     costomMessageBox/messagebox.cpp \
     fileOperate/fileoperate.cpp \
+    fileOperate/openproject.cpp \
     main.cpp \
     mainwindow.cpp \
     patronpage.cpp \
@@ -26,7 +27,9 @@ HEADERS += \
     NewProjectWizard/wizard.h \
     config/newproject_config.h \
     costomMessageBox/messagebox.h \
+    dataProcess/ASinfo.h \
     fileOperate/fileoperate.h \
+    fileOperate/openproject.h \
     mainwindow.h \
     patronpage.h \
     welcomepage.h

@@ -11,6 +11,7 @@ public:
     FileOperate();
     static QString openDirectory(QString DEFAULT_PATH="");
     static QString openFile(QString filePath = "",QString fileType="");
+    static bool createFile(QString name,QString type,QString path);
 
     //打开文件类型
     inline static const QString VIDEO_FILE = "视频文件 (*.mp4 *.avi *.mkv)";
