@@ -18,7 +18,9 @@ SOURCES += \
     fileOperate/openproject.cpp \
     main.cpp \
     mainwindow.cpp \
+    media/videoinformation.cpp \
     patronpage.cpp \
+    subtittleProcess/dividestr2dict.cpp \
     welcomepage.cpp
 
 HEADERS += \
@@ -31,7 +33,9 @@ HEADERS += \
     fileOperate/fileoperate.h \
     fileOperate/openproject.h \
     mainwindow.h \
+    media/videoinformation.h \
     patronpage.h \
+    subtittleProcess/dividestr2dict.h \
     welcomepage.h
 
 FORMS += \
@@ -54,3 +58,30 @@ RESOURCES += \
 
 DISTFILES += \
     config/LEWFconfig.json
+
+INCLUDEPATH += $$PWD/../include
+DEPENDPATH += $$PWD/../include
+
+LIBS += -L$$PWD/../lib/ -lavcodec -lavdevice -lavfilter -lavformat -lavutil -lpostproc -lswresample -lswscale
+
+
+#LIBS += -L$$PWD/../lib/avcodec.lib \
+#        -L$$PWD/../lib/avdevice.lib \
+#        -L$$PWD/../lib/avfilter.lib \
+#        -L$$PWD/../lib/avformat.lib \
+#        -L$$PWD/../lib/avutil.lib \
+#        -L$$PWD/../lib/postproc.lib \
+#        -L$$PWD/../lib/swresample.lib \
+#        -L$$PWD/../lib/swscale.lib
+
+
+#LIBS += -L$$PWD/../bin -lavcodec-58
+#LIBS += -L$$PWD/../bin -lavdevice-58
+#LIBS += -L$$PWD/../bin -lavformat-58
+#LIBS += -L$$PWD/../bin -lpostproc-55
+#LIBS += -L$$PWD/../bin -lswresample-3
+#LIBS += -L$$PWD/../bin -lswscale-5
+
+
+
+
