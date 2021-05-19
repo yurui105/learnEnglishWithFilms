@@ -9,6 +9,7 @@
 #include "NewProjectWizard/wizard.h"
 #include "mainwindow.h"
 
+class MainWindow;
 namespace Ui {
 class SecondPage;
 }
@@ -36,6 +37,7 @@ private slots:
     void on_open_audio_button_clicked();
     void on_open_subtittle_button_clicked();
     void on_create_project_button_clicked();
+
 };
 
 #endif // SECONDPAGE_H

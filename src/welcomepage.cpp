@@ -36,8 +36,10 @@ void WelcomePage::newProject(){
     //NewProjectWizard类采用sigleton设计
     //NewProject类的构造函数中默认对第一个界面进行显示，所以只需实例化该类即可
     NewProjectWizard &wizard = NewProjectWizard::getInstance();
+    wizard.setWelcomePage(this);
     if(wizard.isAllWidgetHide()){
         wizard.showFitsrPage();
+        this->hide();
     }
 }
 

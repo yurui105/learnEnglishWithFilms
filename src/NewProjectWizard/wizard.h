@@ -11,7 +11,9 @@
 #include "fileOperate/fileoperate.h"
 #include "costomMessageBox/messagebox.h"
 #include "dataProcess/ASinfo.h"
+#include "welcomepage.h"
 
+class WelcomePage;
 
 class NewProjectWizard:public QObject{
     Q_OBJECT
@@ -23,7 +25,7 @@ public slots:
     void prevPage();
     void closeWizard();
     void savaData();
-
+public:
     //设置项目相关变量
     void setProjectName(QString name){
         this->project_name = name;
@@ -72,6 +74,18 @@ public slots:
         return subtittle_file_path;
     }
 
+    void setWelcomePage(WelcomePage *page){
+        welcome_instance=page;
+    }
+
+    QJsonDocument get_project_config(){
+        return json_document;
+    }
+
+signals:
+    void close_welcome_page();
+    void let_main_window_init_subtitle();
+
 private:
     NewProjectWizard();
 
@@ -86,6 +100,12 @@ private:
     QString video_file_path;
     ASinfo audio_file_path;
     ASinfo subtittle_file_path;
+
+    //欢迎窗口界面
+    WelcomePage* welcome_instance;
+
+    //项目配置文件
+    QJsonDocument json_document;
 
 };
 

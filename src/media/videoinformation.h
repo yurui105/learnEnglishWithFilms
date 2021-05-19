@@ -2,6 +2,7 @@
 #define VIDEOINFORMATION_H
 
 #include<QString>
+#include<QVector>
 extern "C"{
     #include<libavcodec/avcodec.h>
     #include<libavformat/avformat.h>
@@ -59,28 +60,34 @@ public:
     }
 
     //获取音频编码
-    QString getAudioFormat(){
+    QVector<QString> getAudioFormat(){
         return audio_format;
     }
 
     //获取音频平均码率
-    int getAudioAverageBitRate(){
+    QVector<int> getAudioAverageBitRate(){
         return audio_average_bit_rate;
     }
 
     //获取音频通道
-    int getChannelNumbers(){
+    QVector<int> getChannelNumbers(){
         return channel_nums;
     }
 
     //获取音频采样率
-    int getSampleRate(){
+    QVector<int> getSampleRate(){
         return sample_rate;
     }
 
     //获取音频大小
-    float getAudioSize(){
+    QVector<float> getAudioSize(){
         return audio_size;
+    }
+    QVector<QString> getSubtitleName(){
+        return subtitle_name;
+    }
+    QVector<QString> getSubtitleFormat(){
+        return subtitle_format;
     }
 
 
@@ -108,11 +115,15 @@ private:
     QString video_format;//视频编码格式
 
     //音频
-    QString audio_format;//音频编码格式
-    int audio_average_bit_rate;//音频平均码率
-    int channel_nums;//声道数
-    int sample_rate;//采样率
-    int audio_size;//音频流大小
+    QVector<QString> audio_format;//音频编码格式
+    QVector<int> audio_average_bit_rate;//音频平均码率
+    QVector<int> channel_nums;//声道数
+    QVector<int> sample_rate;//采样率
+    QVector<float> audio_size;//音频流大小
+
+    //字幕
+    QVector<QString> subtitle_name;
+    QVector<QString> subtitle_format;
 };
 
 #endif // VIDEOINFORMATION_H

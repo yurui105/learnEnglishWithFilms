@@ -10,6 +10,8 @@ NewProjectWizard::NewProjectWizard()
         current = pages.begin();
     }
     (*current)->show();
+
+    QObject::connect(this,&NewProjectWizard::close_welcome_page,welcome_instance,&WelcomePage::close);
 }
 
 NewProjectWizard &NewProjectWizard::getInstance()
@@ -42,10 +44,17 @@ void NewProjectWizard::prevPage()
 
 void NewProjectWizard::closeWizard()
 {
+    emit let_main_window_init_subtitle();
     for(int i=0;i<pages.size();i++){
         qDebug()<<"析构向导页面"<<i<<":"<<pages[i];
         delete pages[i];
     }
+
+    //
+    if(welcome_instance!=nullptr){
+        welcome_instance->close();
+    }
+
 }
 
 //保存项目配置到文件
@@ -69,7 +78,6 @@ void NewProjectWizard::savaData()
     projectData.insert("AudioInfo",QJsonValue(audioObject));
     projectData.insert("SubtittleInfo",QJsonValue(subtittleObject));
 
-    QJsonDocument json_document;
     json_document.setObject(projectData);
 
     bool created = FileOperate::createFile(project_name,"json",project_path);

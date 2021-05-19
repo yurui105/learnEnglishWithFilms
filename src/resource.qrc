@@ -6,6 +6,7 @@
         <file>image/icon/patron.png</file>
         <file>image/icon/down.png</file>
         <file>image/icon/up.png</file>
+        <file>image/mulan.png</file>
     </qresource>
     <qresource prefix="/patron">
         <file>image/patron/alipay.jpg</file>

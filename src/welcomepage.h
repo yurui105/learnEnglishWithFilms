@@ -24,7 +24,7 @@ public:
 private:
     Ui::WelcomePage *ui;
     PatronPage *patronPage;//赞赏界面
-    FirstPage *newProjectPage;//新建项目界面
+//    FirstPage *newProjectPage;//新建项目界面
 
 
     //配置信号槽
