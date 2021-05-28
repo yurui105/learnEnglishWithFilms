@@ -22,6 +22,7 @@ debug
 core
 !core/
 tags
+bin/test_movie
 release
 .*
 .DS_Store

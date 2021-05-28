@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1008</width>
-    <height>868</height>
+    <width>1120</width>
+    <height>823</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,19 +17,21 @@
    <string notr="true">background-color: rgb(255, 255, 255);</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QHBoxLayout" name="horizontalLayout">
+   <layout class="QHBoxLayout" name="horizontalLayout_6">
     <item>
-     <layout class="QVBoxLayout" name="verticalLayout">
+     <layout class="QHBoxLayout" name="horizontalLayout_5">
       <item>
-       <widget class="QTabWidget" name="vedio_combobox">
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>450</height>
-         </size>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QTabWidget {
+       <layout class="QVBoxLayout" name="verticalLayout">
+        <item>
+         <widget class="QTabWidget" name="tabWidget">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>500</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QTabWidget {
 	
 	background-color: rgb(255, 255, 255);
 	font-family: &quot;楷体&quot;;
@@ -51,36 +53,360 @@ QTabBar::tab:selected {
   color: #ffffff;
     background-color: #005792;
 }</string>
-        </property>
-        <property name="currentIndex">
-         <number>0</number>
-        </property>
-        <widget class="QWidget" name="video_list">
-         <attribute name="title">
-          <string>视频列表</string>
-         </attribute>
-         <layout class="QHBoxLayout" name="horizontalLayout_4">
+          </property>
+          <property name="currentIndex">
+           <number>0</number>
+          </property>
+          <widget class="QWidget" name="tab">
+           <attribute name="title">
+            <string>Tab 1</string>
+           </attribute>
+           <layout class="QHBoxLayout" name="horizontalLayout_4">
+            <item>
+             <widget class="QMDKWidget" name="openGLWidget"/>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QWidget" name="tab_2">
+           <attribute name="title">
+            <string>Tab 2</string>
+           </attribute>
+          </widget>
+         </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <item>
+           <widget class="QSlider" name="playerSlider">
+            <property name="styleSheet">
+             <string notr="true">QSlider::groove:horizontal {
+  border: 0px solid #bbb;
+}
+ 
+QSlider::sub-page:horizontal {
+  background: rgb(255,255,0);
+  border-radius: 0px;
+  margin-top: 8px;
+  margin-bottom: 9px;
+}
+ 
+QSlider::add-page:horizontal {
+  background: rgb(0,0,0);
+  border: 0px solid #777; 
+  border-radius: 2px; 
+  margin-top: 8px; 
+  margin-bottom: 9px; 
+}
+ 
+QSlider::handle:horizontal { 
+  background: rgb(255,255,255); 
+  border: 1px solid rgba(102,102,102,102); 
+  width: 8px; 
+  height: 8px; 
+  border-radius: 5px; 
+  margin-top: 2px; 
+  margin-bottom: 2px; 
+}
+ 
+QSlider::handle:horizontal:hover { 
+  background: rgb(255,255,0); 
+  border: 1px solid rgba(102,102,102,102); 
+  border-radius: 5px; 
+}
+ 
+QSlider::sub-page:horizontal:disabled { 
+  background: #bbb; 
+  border-color: #999; 
+}
+ 
+QSlider::add-page:horizontal:disabled { 
+  background: #eee; 
+  border-color: #999; 
+}
+ 
+QSlider::handle:horizontal:disabled { 
+  background: #eee; 
+  border: 1px solid #aaa; 
+  border-radius: 4px; 
+}</string>
+            </property>
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+           </widget>
+          </item>
           <item>
            <widget class="QLabel" name="label">
-            <property name="styleSheet">
-             <string notr="true">background-color: rgb(0, 0, 0);</string>
+            <property name="minimumSize">
+             <size>
+              <width>50</width>
+              <height>0</height>
+             </size>
             </property>
             <property name="text">
              <string/>
             </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout">
+          <item>
+           <widget class="QPushButton" name="pushButton_pause">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>20</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton {
+    font-family: &quot;楷体&quot;;
+    font-size: 17px;
+    color: #000000;
+
+    border-style: solid;
+    border-width: 1px;
+    border-color: #a39e9e;
+    border-radius: 10px;
+
+    background-color: #ffffff;
+}
+QPushButton:hover{
+	color: #ffffff;
+    background-color: #005792;
+}
+QPushButton:pressed{
+	color: #ffffff;
+    background-color: #13334c;
+}</string>
+            </property>
+            <property name="text">
+             <string>暂停</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_play">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>20</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton {
+    font-family: &quot;楷体&quot;;
+    font-size: 17px;
+    color: #000000;
+
+    border-style: solid;
+    border-width: 1px;
+    border-color: #a39e9e;
+    border-radius: 10px;
+
+    background-color: #ffffff;
+}
+QPushButton:hover{
+	color: #ffffff;
+    background-color: #005792;
+}
+QPushButton:pressed{
+	color: #ffffff;
+    background-color: #13334c;
+}</string>
+            </property>
+            <property name="text">
+             <string>播放</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_reset">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>20</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton {
+    font-family: &quot;楷体&quot;;
+    font-size: 17px;
+    color: #000000;
+
+    border-style: solid;
+    border-width: 1px;
+    border-color: #a39e9e;
+    border-radius: 10px;
+
+    background-color: #ffffff;
+}
+QPushButton:hover{
+	color: #ffffff;
+    background-color: #005792;
+}
+QPushButton:pressed{
+	color: #ffffff;
+    background-color: #13334c;
+}</string>
+            </property>
+            <property name="text">
+             <string>重新播放</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_stop">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>20</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton {
+    font-family: &quot;楷体&quot;;
+    font-size: 17px;
+    color: #000000;
+
+    border-style: solid;
+    border-width: 1px;
+    border-color: #a39e9e;
+    border-radius: 10px;
+
+    background-color: #ffffff;
+}
+QPushButton:hover{
+	color: #ffffff;
+    background-color: #005792;
+}
+QPushButton:pressed{
+	color: #ffffff;
+    background-color: #13334c;
+}</string>
+            </property>
+            <property name="text">
+             <string>停止播放</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_2">
+            <property name="minimumSize">
+             <size>
+              <width>30</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>20</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">image: url(:/icon/image/icon/volume.png);</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QSlider" name="volumeSlider">
+            <property name="maximumSize">
+             <size>
+              <width>100</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QSlider::groove:horizontal {
+  border: 0px solid #bbb;
+}
+ 
+QSlider::sub-page:horizontal {
+  background: rgb(255,255,0);
+  border-radius: 0px;
+  margin-top: 8px;
+  margin-bottom: 9px;
+}
+ 
+QSlider::add-page:horizontal {
+  background: rgb(0,0,0);
+  border: 0px solid #777; 
+  border-radius: 2px; 
+  margin-top: 8px; 
+  margin-bottom: 9px; 
+}
+ 
+QSlider::handle:horizontal { 
+  background: rgb(255,255,255); 
+  border: 1px solid rgba(102,102,102,102); 
+  width: 8px; 
+  height: 8px; 
+  border-radius: 5px; 
+  margin-top: 2px; 
+  margin-bottom: 2px; 
+}
+ 
+QSlider::handle:horizontal:hover { 
+  background: rgb(255,255,0); 
+  border: 1px solid rgba(102,102,102,102); 
+  border-radius: 5px; 
+}
+ 
+QSlider::sub-page:horizontal:disabled { 
+  background: #bbb; 
+  border-color: #999; 
+}
+ 
+QSlider::add-page:horizontal:disabled { 
+  background: #eee; 
+  border-color: #999; 
+}
+ 
+QSlider::handle:horizontal:disabled { 
+  background: #eee; 
+  border: 1px solid #aaa; 
+  border-radius: 4px; 
+}</string>
+            </property>
+            <property name="maximum">
+             <number>10</number>
+            </property>
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
             </property>
            </widget>
           </item>
          </layout>
-        </widget>
-       </widget>
-      </item>
-      <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        </item>
         <item>
          <layout class="QVBoxLayout" name="verticalLayout_2">
+          <item>
+           <layout class="QHBoxLayout" name="progressLayout">
+            <item>
+             <widget class="QLabel" name="progress_label">
+              <property name="styleSheet">
+               <string notr="true">font: 12pt &quot;楷体&quot;;</string>
+              </property>
+              <property name="text">
+               <string>视频剪辑进度</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QProgressBar" name="progressBar">
+              <property name="value">
+               <number>0</number>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
           <item>
            <widget class="QTableWidget" name="words_table_2">
             <property name="maximumSize">
@@ -113,7 +439,6 @@ QTabBar::tab:selected {
              </property>
              <property name="font">
               <font>
-               <family>楷体</family>
                <pointsize>14</pointsize>
               </font>
              </property>
@@ -124,7 +449,6 @@ QTabBar::tab:selected {
              </property>
              <property name="font">
               <font>
-               <family>楷体</family>
                <pointsize>14</pointsize>
               </font>
              </property>
@@ -138,6 +462,34 @@ QTabBar::tab:selected {
             </item>
             <item>
              <widget class="QPushButton" name="btnOpen">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>20</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QPushButton {
+    font-family: &quot;楷体&quot;;
+    font-size: 17px;
+    color: #000000;
+
+    border-style: solid;
+    border-width: 1px;
+    border-color: #a39e9e;
+    border-radius: 10px;
+
+    background-color: #ffffff;
+}
+QPushButton:hover{
+	color: #ffffff;
+    background-color: #005792;
+}
+QPushButton:pressed{
+	color: #ffffff;
+    background-color: #13334c;
+}</string>
+              </property>
               <property name="text">
                <string>播放</string>
               </property>
@@ -147,68 +499,65 @@ QTabBar::tab:selected {
           </item>
          </layout>
         </item>
-        <item>
-         <widget class="QTableWidget" name="words_table">
-          <property name="maximumSize">
-           <size>
-            <width>350</width>
-            <height>16777215</height>
-           </size>
-          </property>
-          <property name="styleSheet">
-           <string notr="true"/>
-          </property>
-          <property name="editTriggers">
-           <set>QAbstractItemView::DoubleClicked</set>
-          </property>
-          <property name="selectionMode">
-           <enum>QAbstractItemView::SingleSelection</enum>
-          </property>
-          <property name="sortingEnabled">
-           <bool>true</bool>
-          </property>
-          <attribute name="horizontalHeaderHighlightSections">
-           <bool>true</bool>
-          </attribute>
-          <attribute name="verticalHeaderVisible">
-           <bool>false</bool>
-          </attribute>
-          <column>
-           <property name="text">
-            <string>序号</string>
-           </property>
-           <property name="font">
-            <font>
-             <family>楷体</family>
-             <pointsize>14</pointsize>
-            </font>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>单词</string>
-           </property>
-           <property name="font">
-            <font>
-             <family>楷体</family>
-             <pointsize>14</pointsize>
-            </font>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>频率</string>
-           </property>
-           <property name="font">
-            <font>
-             <family>楷体</family>
-             <pointsize>14</pointsize>
-            </font>
-           </property>
-          </column>
-         </widget>
-        </item>
        </layout>
+      </item>
+      <item>
+       <widget class="QTableWidget" name="words_table">
+        <property name="maximumSize">
+         <size>
+          <width>350</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="editTriggers">
+         <set>QAbstractItemView::DoubleClicked</set>
+        </property>
+        <property name="selectionMode">
+         <enum>QAbstractItemView::SingleSelection</enum>
+        </property>
+        <property name="sortingEnabled">
+         <bool>true</bool>
+        </property>
+        <attribute name="horizontalHeaderHighlightSections">
+         <bool>true</bool>
+        </attribute>
+        <attribute name="verticalHeaderVisible">
+         <bool>false</bool>
+        </attribute>
+        <column>
+         <property name="text">
+          <string>序号</string>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>14</pointsize>
+          </font>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>单词</string>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>14</pointsize>
+          </font>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>频率</string>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>14</pointsize>
+          </font>
+         </property>
+        </column>
+       </widget>
       </item>
      </layout>
     </item>
@@ -219,13 +568,20 @@ QTabBar::tab:selected {
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1008</width>
-     <height>22</height>
+     <width>1120</width>
+     <height>24</height>
     </rect>
    </property>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QMDKWidget</class>
+   <extends>QOpenGLWidget</extends>
+   <header>qmdkwidget.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

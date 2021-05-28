@@ -5,6 +5,7 @@
 #include<qregularexpression.h>
 #include<regex>
 #include<QTime>
+#include<string>
 DivideStr2dict::DivideStr2dict()
 {
     
@@ -52,7 +53,7 @@ void DivideStr2dict::get_word_frequency(QString filepath)
 
     
     for (auto it = words.begin(); it != words.end(); it++) {
-        tvector.push_back(make_pair(it->first, it->second));
+        tvector.push_back(std::make_pair(it->first, it->second));
     }
     sort(tvector.begin(), tvector.end(), cmp);
     processTime();
@@ -69,12 +70,12 @@ void DivideStr2dict::get_word_frequency(QString filepath)
 
 void DivideStr2dict::processTime()
 {
-    regex pattern("[0-9]{2}:[0-9]{2}:[0-9]{2}");
+    std::regex pattern("[0-9]{2}:[0-9]{2}:[0-9]{2}");
     for (auto it = time_vec.begin(); it != time_vec.end(); it++) {
-        string temp = (*it).toStdString();
-        smatch result;
-        string::const_iterator itBegin = temp.begin();
-        string::const_iterator itEnd = temp.end();
+        std::string temp = (*it).toStdString();
+        std::smatch result;
+        std::string::const_iterator itBegin = temp.begin();
+        std::string::const_iterator itEnd = temp.end();
 
         QVector<QString> time;
 
@@ -83,7 +84,7 @@ void DivideStr2dict::processTime()
             itBegin = result[0].second;
         }//while
 
-        occurrences_time.push_back(make_pair(time[0], time[1]));
+        occurrences_time.push_back(std::make_pair(time[0], time[1]));
         time.clear();
     }
 }
@@ -94,7 +95,7 @@ void DivideStr2dict::processTime()
 /// <param name="c">待匹配的字符</param>
 /// <returns>返回匹配结果</returns>
 bool DivideStr2dict::is_in(char c) {
-    string rule = "\'\"?\\/?!@#$%^&*()<>[]{},.;:-_";
+    std::string rule = "\'\"?\\/?!@#$%^&*()<>[]{},.;:-_";
     for (unsigned int i = 0; i < rule.size(); i++) {
         if (c == rule[i]) {
             return true;
@@ -136,6 +137,6 @@ void DivideStr2dict::analysis_line(QString s,QString time) {
     }
 }
 
-int DivideStr2dict::cmp(const pair<QString, time_fre> &a, const pair<QString, time_fre> &b) {
+int DivideStr2dict::cmp(const std::pair<QString, time_fre> &a, const std::pair<QString, time_fre> &b) {
     return a.second.frequency < b.second.frequency;
 }

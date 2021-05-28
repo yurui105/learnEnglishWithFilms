@@ -5,9 +5,11 @@
 #include<QUrl>
 #include<QDesktopServices>
 #include<QPushButton>
-
+#include<QMessageBox>
 #include"patronpage.h"
 #include"NewProjectWizard/firstpage.h"
+#include"fileOperate/openproject.h"
+#include"mainwindow.h"
 
 namespace Ui {
 class WelcomePage;
@@ -37,6 +39,8 @@ public slots:
     void openPatron();
     //新建项目
     void newProject();
+    //打开项目
+    void openProject();
 };
 
 #endif // WELCOMEPAGE_H

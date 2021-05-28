@@ -6,16 +6,31 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
+    ,isNewProject(true)
 {
     ui->setupUi(this);
-//    QObject::connect(wizard,SIGNAL(let_main_window_init_subtitle()),this,SLOT(init_subtitle()),Qt::QueuedConnection);
     QObject::connect(this, &MainWindow::startThread_signal, this, &MainWindow::openThreadSlot);
+    connect(ui->words_table, SIGNAL(cellDoubleClicked(int, int)), this, SLOT(on_word_table_click(int,int)));
 
+    //视频播放信号槽
+    timer = new QTimer(this);
+    connect(this,SIGNAL(setMedia(QString)),this,SLOT(loadMedia(QString)));
+    connect(timer,&QTimer::timeout,this,&MainWindow::timeout_update);
+    connect(ui->volumeSlider,SIGNAL(valueChanged(int)),this,SLOT(on_horizontalSlider_Volume_valueChanged(int)));
+    connect(ui->pushButton_play,&QPushButton::clicked,this,&MainWindow::on_pushButton_play_clicked);
+    connect(ui->pushButton_pause,&QPushButton::clicked,this,&MainWindow::on_pushButton_pause_clicked);
+    connect(ui->pushButton_reset,&QPushButton::clicked,this,&MainWindow::on_pushButton_reset_clicked);
+    connect(ui->pushButton_stop,&QPushButton::clicked,this,&MainWindow::on_pushButton_stop_clicked);
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::set_project_status(bool status=false)
+{
+    isNewProject=false;
 }
 
 void MainWindow::openThreadSlot()
@@ -31,6 +46,7 @@ void MainWindow::openThreadSlot()
     connect(firstThread, SIGNAL(finished()), cutThread, SLOT(deleteLater()));        //终止线程时要调用deleteLater槽函数
     connect(firstThread, SIGNAL(started()), cutThread, SLOT(startWoker()));  //开启线程槽函数
     connect(firstThread, SIGNAL(finished()), this, SLOT(finishedThreadSlot()));
+    connect(cutThread, SIGNAL(progress(int)), this, SLOT(process(int)));
     firstThread->start();
 }
 
@@ -45,6 +61,63 @@ void MainWindow::closeThreadSlot()
     }
 }
 
+void MainWindow::process(int a)
+{
+    if (a < subtitle->getOccurrencesTime().size()) {
+        //更新当前进度
+        ui->progressBar->setValue(a);
+        qDebug() << "main thread:" << a;
+    }
+    else {
+        //进度完成，隐藏进度条
+        ui->progressBar->setVisible(false);
+        ui->progress_label->hide();
+    }
+}
+
+void MainWindow::on_word_table_click(int x, int y)
+{
+    play_time.clear();
+    current=0;
+    qDebug() << "双击表格:" << x << ":" << y;
+    //获取表格内容
+    QVector<QString> time;
+    QString word = ui->words_table->item(x,1)->text();
+
+    tvector=subtitle->get_sorted_sequence();
+    for(QVector<std::pair<QString, time_fre>>::iterator it = tvector.begin();it!=tvector.end();it++){
+        if(it->first==word){
+            current=0;
+            time.clear();
+            time=it->second.time;
+            break;
+        }
+    }
+
+    //将时间信息变换为文件名字
+    //时间类型：00:01:21,541 --> 00:01:23,291
+    std::regex pattern("[0-9]{2}:[0-9]{2}:[0-9]{2}");
+    for(auto it:time){
+        std::string temp = it.toStdString();
+        std::smatch result;
+        std::string::const_iterator itBegin = temp.begin();
+        std::string::const_iterator itEnd = temp.end();
+
+        QVector<QString> time_temp;
+
+        while (regex_search(itBegin,itEnd, result, pattern)) {
+            time_temp.push_back(QString::fromStdString(result[0]));
+            itBegin = result[0].second;
+        }//while
+        play_time.push_back(time_temp[0].replace(":","")+"-"+time_temp[1].replace(":","")+".mp4");
+    }
+    //设置播放的文件
+    qDebug()<<project_path+"/data/"+play_time[current%play_time.size()];
+    emit setMedia(project_path+"/data/"+play_time[current%play_time.size()]);
+    current++;
+
+}
+
 void MainWindow::init_subtitle()
 {
     //初始化字幕数据
@@ -54,24 +127,18 @@ void MainWindow::init_subtitle()
 
 
     //新线程处理视频
-    emit startThread_signal();
-
-
-    //截图专用
-    QImage* img = new QImage; //新建一个image对象
-
-    img->load(":/icon/image/mulan.png"); //将图像资源载入对象img，注意路径，可点进图片右键复制路径
-    QPixmap map = QPixmap::fromImage(*img);
-    //int with = ui->label->width();
-    //int height = ui->label->height();
-    //QPixmap fitpixmap = map.scaled(with, height, Qt::KeepAspectRatio, Qt::SmoothTransformation);
-    ui->label->setPixmap(map); //将图片放入label，使用setPixmap,注意指针*img
+    if(isNewProject){
+        //如果该项目为第一次创建，则剪切视频
+        //如果该项目为已经创建的项目，则不进行视频剪切
+        emit startThread_signal();
+    }
+    loadMedia("../bin/Im.Thinking.of.Ending.Things.2020.1080p/Im.Thinking.of.Ending.Things.2020.mkv");
 }
 
 void MainWindow::setWordsTable()
 {
     //设置词频表格
-    QVector<pair<QString, time_fre>> words = subtitle->get_sorted_sequence();
+    QVector<std::pair<QString, time_fre>> words = subtitle->get_sorted_sequence();
     int i=0;
     for(auto it = words.begin();it!=words.end();it++){
         ui->words_table->insertRow(i);
@@ -80,9 +147,13 @@ void MainWindow::setWordsTable()
         ui->words_table->setItem(i,2,new QTableWidgetItem(QString::number(it->second.frequency)));
         i++;
     }
+    
+    //设置进度条进度
+    int maxProgress = subtitle->getOccurrencesTime().size();
+    ui->progressBar->setMaximum(maxProgress);
 
     //演示专用
-    QVector<pair<QString, QString>> time = subtitle->getOccurrencesTime();
+    QVector<std::pair<QString, QString>> time = subtitle->getOccurrencesTime();
     i = 0;
     for (auto it = time.begin(); it != time.end(); it++) {
         ui->words_table_2->insertRow(i);
@@ -143,3 +214,97 @@ void MainWindow::analysis_subtitle()
     }
 }
 
+//播放
+void MainWindow::on_pushButton_play_clicked()
+{
+    ui->openGLWidget->play();
+    timer->start(100);
+}
+
+//停止播放
+void MainWindow::on_pushButton_stop_clicked()
+{
+    ui->openGLWidget->stop();
+}
+
+////静音
+//void MainWindow::on_pushButton_Volume_clicked()
+//{
+//    static bool value=false;
+//    value=!value;
+//    ui->openGLWidget->setMute(value);
+//}
+
+void MainWindow::on_pushButton_reset_clicked()
+{
+    ui->openGLWidget->seek(0);
+    ui->openGLWidget->play();
+    timer->start(100);
+}
+
+
+void MainWindow::on_pushButton_pause_clicked()
+{
+    timer->stop();
+    ui->openGLWidget->pause();
+}
+
+void MainWindow::loadMedia(QString filepath){
+    ui->openGLWidget->setMedia(filepath);
+    ui->openGLWidget->play();
+    QThread::msleep(100);
+    //设置总时间
+    ui->label->setText(QString("%1").arg(ui->openGLWidget->duration()));
+
+    //设置进度条滑块范围
+    ui->playerSlider->setMinimum(0);
+    ui->playerSlider->setMaximum(ui->openGLWidget->duration());
+    current_video_duration=ui->openGLWidget->duration();
+
+    //事件监听
+    ui->playerSlider->installEventFilter(this);
+
+    //开启定时器
+    timer->start(100);
+
+}
+
+void MainWindow::timeout_update()
+{
+    int64_t pos=ui->openGLWidget->position();
+    ui->playerSlider->setValue(pos);
+    // 设置时间
+    ui->label->setText(QString("%1").arg(pos));
+    qDebug()<<"timeout_update:"<<pos<<"/"<<current_video_duration;
+    //判断当前视频是否播放完毕，是的话则播放下一个视频
+    if(pos==0){
+        qDebug()<<project_path+"/data/"+play_time[current%play_time.size()];
+        loadMedia(project_path+"/data/"+play_time[current%play_time.size()]);
+        current++;
+    }
+}
+
+bool MainWindow::eventFilter(QObject *obj, QEvent *event)
+{
+    if(obj==ui->playerSlider)
+    {
+        if (event->type()==QEvent::MouseButtonPress)           //判断类型
+        {
+            QMouseEvent *mouseEvent = static_cast<QMouseEvent *>(event);
+            if (mouseEvent->button() == Qt::LeftButton)	//判断左键
+            {
+               int value = QStyle::sliderValueFromPosition(ui->playerSlider->minimum(), ui->playerSlider->maximum(), mouseEvent->pos().x(), ui->playerSlider->width());
+               ui->playerSlider->setValue(value);
+
+               //跳转播放器
+               ui->openGLWidget->seek(value);
+            }
+        }
+    }
+    return QObject::eventFilter(obj,event);
+}
+void MainWindow::on_horizontalSlider_Volume_valueChanged(int value)
+{
+    qDebug()<<"音量："<<value;
+     ui->openGLWidget->setVolume(float(value));
+}

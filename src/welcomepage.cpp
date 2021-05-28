@@ -43,6 +43,26 @@ void WelcomePage::newProject(){
     }
 }
 
+void WelcomePage::openProject()
+{
+    QString fileName = FileOperate::openFile(nullptr,FileOperate::PROJECT_FILE);
+    if(fileName.isEmpty()){
+        return;
+    }
+    OpenProject config(fileName);
+    //判断该文件是否有问题
+    if(!config.status()){
+        QMessageBox::warning(this,"打开项目失败","打开项目"+fileName+"\n请检查",QMessageBox::Ok);
+        return;
+    }
+    //初始化主界面
+    MainWindow *mainWindow = new MainWindow();
+    mainWindow->set_project_config(config.get_project_config());
+    mainWindow->set_project_status(false);
+    mainWindow->init_subtitle();
+    mainWindow->show();
+    this->close();
+}
 void WelcomePage::makeConnect(){
     //绑定打开github按钮
     QObject::connect(ui->githubButton,&QPushButton::clicked,this,&WelcomePage::openGithubURL);
@@ -51,4 +71,5 @@ void WelcomePage::makeConnect(){
 
     //新建项目按钮
     QObject::connect(ui->newProjectButton,&QPushButton::clicked,this,&WelcomePage::newProject);
+    QObject::connect(ui->openProjectButton,&QPushButton::clicked,this,&WelcomePage::openProject);
 }

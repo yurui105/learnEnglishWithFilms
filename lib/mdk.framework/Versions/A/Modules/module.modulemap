@@ -1,0 +1,6 @@
+framework module mdk {
+  umbrella header "c/module.h"
+
+  export *
+  module * { export * }
+}
