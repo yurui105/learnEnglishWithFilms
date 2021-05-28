@@ -1,6 +1,6 @@
 #include "NewProjectWizard/wizard.h"
 #include <QDebug>
-
+#include<QMessageBox>
 NewProjectWizard::NewProjectWizard()
 {
     //初始化向导界面,加入列表中
@@ -10,6 +10,8 @@ NewProjectWizard::NewProjectWizard()
         current = pages.begin();
     }
     (*current)->show();
+
+    QObject::connect(this,&NewProjectWizard::close_welcome_page,welcome_instance,&WelcomePage::close);
 }
 
 NewProjectWizard &NewProjectWizard::getInstance()
@@ -42,10 +44,17 @@ void NewProjectWizard::prevPage()
 
 void NewProjectWizard::closeWizard()
 {
+    emit let_main_window_init_subtitle();
     for(int i=0;i<pages.size();i++){
         qDebug()<<"析构向导页面"<<i<<":"<<pages[i];
         delete pages[i];
     }
+
+    //
+    if(welcome_instance!=nullptr){
+        welcome_instance->close();
+    }
+
 }
 
 //保存项目配置到文件
@@ -69,18 +78,21 @@ void NewProjectWizard::savaData()
     projectData.insert("AudioInfo",QJsonValue(audioObject));
     projectData.insert("SubtittleInfo",QJsonValue(subtittleObject));
 
-    QJsonDocument json_document;
     json_document.setObject(projectData);
 
-    bool created = FileOperate::createFile(project_name,"json",project_path);
+    bool created = FileOperate::createFile(project_name,"lef",project_path);
     if(created){
-        QFile file(project_path+"/"+project_name+"."+"json");
+        QFile file(project_path+"/"+project_name+".lef");
         if(file.open(QIODevice::ReadWrite)){
             file.write(json_document.toJson());
             file.close();
         }
+        qDebug()<<"复制字幕文件"<<subtittle_file_path.filePath<<"到"<<"\t"+project_path+"/+subtitle.srt";
+        QFile::copy(subtittle_file_path.filePath,project_path+"/+subtitle.srt");
+
     }else{
         // TO-DO
+        QMessageBox::warning(nullptr,"无法创建文件","无法创建文件，请检查文件路径？",QMessageBox::Yes);
     }
 }
 
@@ -102,5 +114,5 @@ void NewProjectWizard::showFitsrPage()
 
 NewProjectWizard::~NewProjectWizard()
 {
-    delete current;
+//    delete current;
 }

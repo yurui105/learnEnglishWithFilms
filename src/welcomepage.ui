@@ -429,6 +429,241 @@ margin-right: 30px;</string>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
            </property>
+           <widget class="QPushButton" name="recent2">
+            <property name="geometry">
+             <rect>
+              <x>21</x>
+              <y>67</y>
+              <width>200</width>
+              <height>40</height>
+             </rect>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>200</width>
+              <height>40</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>200</width>
+              <height>80</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton {
+    font-family: &quot;楷体&quot;;
+    font-size: 17px;
+    color: #000000;
+
+    border-style: solid;
+    border-width: 1px;
+    border-color: #a39e9e;
+    border-radius: 20px;
+
+    background-color: #ffffff;
+}
+QPushButton:hover{
+	color: #ffffff;
+    background-color: #005792;
+}
+QPushButton:pressed{
+	color: #ffffff;
+    background-color: #13334c;
+}</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+           <widget class="QPushButton" name="recent1">
+            <property name="geometry">
+             <rect>
+              <x>21</x>
+              <y>21</y>
+              <width>200</width>
+              <height>40</height>
+             </rect>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>200</width>
+              <height>40</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>200</width>
+              <height>80</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton {
+    font-family: &quot;楷体&quot;;
+    font-size: 17px;
+    color: #000000;
+
+    border-style: solid;
+    border-width: 1px;
+    border-color: #a39e9e;
+    border-radius: 20px;
+
+    background-color: #ffffff;
+}
+QPushButton:hover{
+	color: #ffffff;
+    background-color: #005792;
+}
+QPushButton:pressed{
+	color: #ffffff;
+    background-color: #13334c;
+}</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+           <widget class="QPushButton" name="recent3">
+            <property name="geometry">
+             <rect>
+              <x>21</x>
+              <y>113</y>
+              <width>200</width>
+              <height>40</height>
+             </rect>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>200</width>
+              <height>40</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>200</width>
+              <height>80</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton {
+    font-family: &quot;楷体&quot;;
+    font-size: 17px;
+    color: #000000;
+
+    border-style: solid;
+    border-width: 1px;
+    border-color: #a39e9e;
+    border-radius: 20px;
+
+    background-color: #ffffff;
+}
+QPushButton:hover{
+	color: #ffffff;
+    background-color: #005792;
+}
+QPushButton:pressed{
+	color: #ffffff;
+    background-color: #13334c;
+}</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+           <widget class="QPushButton" name="recent4">
+            <property name="geometry">
+             <rect>
+              <x>21</x>
+              <y>159</y>
+              <width>200</width>
+              <height>40</height>
+             </rect>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>200</width>
+              <height>40</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>200</width>
+              <height>80</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton {
+    font-family: &quot;楷体&quot;;
+    font-size: 17px;
+    color: #000000;
+
+    border-style: solid;
+    border-width: 1px;
+    border-color: #a39e9e;
+    border-radius: 20px;
+
+    background-color: #ffffff;
+}
+QPushButton:hover{
+	color: #ffffff;
+    background-color: #005792;
+}
+QPushButton:pressed{
+	color: #ffffff;
+    background-color: #13334c;
+}</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+           <widget class="QPushButton" name="recent5">
+            <property name="geometry">
+             <rect>
+              <x>21</x>
+              <y>205</y>
+              <width>200</width>
+              <height>40</height>
+             </rect>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>200</width>
+              <height>40</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>200</width>
+              <height>80</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton {
+    font-family: &quot;楷体&quot;;
+    font-size: 17px;
+    color: #000000;
+
+    border-style: solid;
+    border-width: 1px;
+    border-color: #a39e9e;
+    border-radius: 20px;
+
+    background-color: #ffffff;
+}
+QPushButton:hover{
+	color: #ffffff;
+    background-color: #005792;
+}
+QPushButton:pressed{
+	color: #ffffff;
+    background-color: #13334c;
+}</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
           </widget>
          </item>
         </layout>

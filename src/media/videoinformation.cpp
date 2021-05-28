@@ -30,7 +30,7 @@ void VideoInformation::getVideoInfo(QString file_path)
     mins %= 60;
 
     //格式化视频长度
-    duration = QString("%1:%2:%3").arg(hours).arg(mins).arg(mins);
+    duration = QString("%1:%2:%3").arg(hours).arg(mins).arg(secs);
 
     //获取视频的封装格式
     AVInputFormat* infoFormat = input_AVFormat_context->iformat;
@@ -44,6 +44,9 @@ void VideoInformation::getVideoInfo(QString file_path)
         //判断是否为视频
         if(input_stream->codecpar->codec_type == AVMEDIA_TYPE_VIDEO){
             //avg_frame_rate = avg_grame_rate.num(分子)/avg_frame_den(分母)
+            if(input_stream->avg_frame_rate.den==0){
+                return;
+            }
             frame_rate = input_stream->avg_frame_rate.num/input_stream->avg_frame_rate.den;
 
             //取出视频流中的编码参数，生成部分AVCodecParamters对象
@@ -79,13 +82,22 @@ void VideoInformation::getVideoInfo(QString file_path)
                 return;
             }
 
-            audio_format = avcodec_get_name(avctx_audio->codec_id);
-            audio_average_bit_rate = codec_par->bit_rate/1000;
-            channel_nums = codec_par->channels;
-            sample_rate = codec_par->sample_rate;
-            audio_size = audio_average_bit_rate*secs/(8.0*1024);
-        }
+            audio_format.push_back(avcodec_get_name(avctx_audio->codec_id));
+            audio_average_bit_rate.push_back(codec_par->bit_rate/1000);
+            channel_nums.push_back(codec_par->channels);
+            sample_rate.push_back(codec_par->sample_rate);
+            audio_size.push_back(audio_average_bit_rate.back()*secs/(8.0*1024));
+        }else if(input_stream->codecpar->codec_type == AVMEDIA_TYPE_SUBTITLE){//视频文件
+            AVCodecParameters* codec_par = input_stream->codecpar;
+            AVCodecContext* avctx_subtitle;
+            avctx_subtitle = avcodec_alloc_context3(NULL);
+            int ret = avcodec_parameters_to_context(avctx_subtitle,codec_par);
+            if(ret<0){
+                avcodec_free_context(&avctx_subtitle);
+                return;
+            }
+            subtitle_format.push_back(avcodec_get_name(avctx_subtitle->codec_id));
     }
 }
 
-
+}

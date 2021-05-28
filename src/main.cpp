@@ -5,7 +5,7 @@
 #include"NewProjectWizard/firstpage.h"
 
 #include"media/videoinformation.h"
-
+#include<subtittleProcess/dividestr2dict.h>
 #include <QApplication>
 #include<QFileDialog>
 #include<iostream>
@@ -13,6 +13,7 @@
 
 int main(int argc, char *argv[])
 {
+    QCoreApplication::setAttribute(Qt::AA_ShareOpenGLContexts);
     QApplication a(argc, argv);
 
 //    QString fileName = QFileDialog::getOpenFileName();
@@ -33,6 +34,9 @@ int main(int argc, char *argv[])
 //        qDebug()<< "audio size: "<<v1->getAudioSize();
 //        qDebug()<< "audio smaple rate: "<<v1->getSampleRate();
 //        qDebug()<<"audio channel numbers: "<<v1->getChannelNumbers();
+
+    /*DivideStr2dict dic;
+    dic.get_word_frequency("I:\\learnEnglishWithFilms\\bin\\Im.Thinking.of.Ending.Things.2020.1080p\\test.str");*/
 
     WelcomePage w;
     w.show();
