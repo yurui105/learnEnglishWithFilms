@@ -116,8 +116,8 @@ void WelcomePage::openProject()
     //初始化主界面
     MainWindow *mainWindow = new MainWindow();
     mainWindow->set_project_config(config.get_project_config());
-    mainWindow->init_subtitle();
     mainWindow->set_project_status(false);
+    mainWindow->init_subtitle();
     mainWindow->show();
     this->close();
 }

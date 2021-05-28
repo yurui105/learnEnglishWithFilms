@@ -138,5 +138,5 @@ void DivideStr2dict::analysis_line(QString s,QString time) {
 }
 
 int DivideStr2dict::cmp(const std::pair<QString, time_fre> &a, const std::pair<QString, time_fre> &b) {
-    return a.second.frequency < b.second.frequency;
+    return a.second.frequency > b.second.frequency;
 }

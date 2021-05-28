@@ -64,7 +64,7 @@ void VideoCutThread::startWoker() {
 		ShExecInfo.hInstApp = NULL;
 		ShellExecuteEx(&ShExecInfo);
 		WaitForSingleObject(ShExecInfo.hProcess, INFINITE);
-#endif
+#elif Q_OS_OSX
         QString para = QString("/c ffmpeg -y -ss %1 -t %2 -i %3 -codec copy %4").arg(it->first,duration,video_path,out);
         //构造参数
         QProcess p(nullptr);
@@ -84,7 +84,7 @@ void VideoCutThread::startWoker() {
         p.waitForFinished();
         qDebug()<<QString::fromLocal8Bit(p.readAllStandardError());
 
-
+#endif
         qDebug()<<i;
 		emit progress(i);
 	}
