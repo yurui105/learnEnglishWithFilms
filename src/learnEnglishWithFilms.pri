@@ -8,7 +8,6 @@ message("You are running qmake on a generated .pro file. This may not work!")
 
 
 HEADERS += ./dataProcess/ASinfo.h \
-    $$PWD/config/rencentProjectConfig.h \
     ./subtittleProcess/dividestr2dict.h \
     ./fileOperate/fileoperate.h \
     ./config/newproject_config.h \

@@ -9,6 +9,7 @@ QT       += core gui openglwidgets widgets opengl
 TARGET = learnEnglishWithFilms
 DESTDIR = ../debug
 CONFIG += debug
+
 DEFINES += _WINDOWS _UNICODE _ENABLE_EXTENDED_ALIGNED_STORAGE WIN64
 INCLUDEPATH += $$PWD/../include
 DEPENDPATH += $$PWD/../include
@@ -21,7 +22,6 @@ LIBS += -L"../../lib" \
     -l../lib/postproc \
     -l../lib/mdk \
     -lshell32
-
 DEPENDPATH += .
 MOC_DIR += .
 OBJECTS_DIR += debug
@@ -29,3 +29,57 @@ UI_DIR += .
 RCC_DIR += .
 include(learnEnglishWithFilms.pri)
 TRANSLATIONS += learnEnglishWithFilms_zh_CN.ts
+
+macx: LIBS += -L$$PWD/../lib/ -lavcodec
+
+INCLUDEPATH += $$PWD/../include
+DEPENDPATH += $$PWD/../include
+
+macx: PRE_TARGETDEPS += $$PWD/../lib/libavcodec.a
+
+macx: LIBS += -L$$PWD/../lib/ -lavdevice
+
+INCLUDEPATH += $$PWD/../include
+DEPENDPATH += $$PWD/../include
+
+macx: PRE_TARGETDEPS += $$PWD/../lib/libavdevice.a
+
+macx: LIBS += -L$$PWD/../lib/ -lavfilter
+
+INCLUDEPATH += $$PWD/../include
+DEPENDPATH += $$PWD/../include
+
+macx: PRE_TARGETDEPS += $$PWD/../lib/libavfilter.a
+
+macx: LIBS += -L$$PWD/../lib/ -lavformat
+
+INCLUDEPATH += $$PWD/../include
+DEPENDPATH += $$PWD/../include
+
+macx: PRE_TARGETDEPS += $$PWD/../lib/libavformat.a
+
+macx: LIBS += -L$$PWD/../lib/ -lavutil
+
+INCLUDEPATH += $$PWD/../include
+DEPENDPATH += $$PWD/../include
+
+macx: PRE_TARGETDEPS += $$PWD/../lib/libavutil.a
+
+macx: LIBS += -L$$PWD/../lib/ -lswresample
+
+INCLUDEPATH += $$PWD/../include
+DEPENDPATH += $$PWD/../include
+
+macx: PRE_TARGETDEPS += $$PWD/../lib/libswresample.a
+
+macx: LIBS += -L$$PWD/../lib/ -lswscale
+
+INCLUDEPATH += $$PWD/../include
+DEPENDPATH += $$PWD/../include
+
+macx: PRE_TARGETDEPS += $$PWD/../lib/libswscale.a
+
+mac: LIBS += -F$$PWD/../lib/ -framework mdk
+
+INCLUDEPATH += $$PWD/../include
+DEPENDPATH += $$PWD/../include

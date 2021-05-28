@@ -51,7 +51,7 @@ private:
 
 public slots:
     void init_subtitle();
-    void startThread_slot() { qDebug() << "准备睡眠"; _sleep(10000); qDebug() << "睡眠十秒执行"; }
+    void startThread_slot() { qDebug() << "准备睡眠";QThread::sleep(10000); qDebug() << "睡眠十秒执行"; }
     //视频处理线程相关
     void openThreadSlot();
     void closeThreadSlot();

@@ -61,9 +61,8 @@ void FirstPage::init_edit(){
     //设置输入框正则表达式
 #ifdef Q_OS_WIN32
     QRegularExpression projectPathReg("^[a-zA-Z]:([\\\\/][^\\s\\\\/:*?<>\"|][^\\\\/:*?<>\"|]*)*([/\\\\])?$");
-#elif
-    QRegularExpression projectPathReg("^\/(\w+\/?)+$");
 #endif
+    QRegularExpression projectPathReg("^\/(\w+\/?)+$");
 
     QRegularExpression projectNameReg("^[^?？\\*|“<>:/]{1,256}$");
     QValidator *projectPathValidator=new QRegularExpressionValidator(projectPathReg,this);

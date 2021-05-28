@@ -114,5 +114,5 @@ void NewProjectWizard::showFitsrPage()
 
 NewProjectWizard::~NewProjectWizard()
 {
-//    delete current;
+    //delete current;
 }

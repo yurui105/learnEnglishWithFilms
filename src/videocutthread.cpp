@@ -5,7 +5,10 @@
 #include<QDir>
 #include<QTime>
 #include<cstdlib>
+#ifdef Q_OS_WIN32
 #include<Windows.h>
+#endif
+#include<QProcess>
 #include<string>
 
 void VideoCutThread::closeThread()
@@ -46,8 +49,9 @@ void VideoCutThread::startWoker() {
 		QString out = data_path + first + "-" + second + ".mp4";
 		
 
-		QString para = QString("/c ffmpeg -y -ss %1 -t %2 -i %3 -codec copy %4").arg(it->first,duration,video_path,out);
 
+#ifdef Q_OS_WIN32
+        QString para = QString("/c ffmpeg -y -ss %1 -t %2 -i %3 -codec copy %4").arg(it->first,duration,video_path,out);
 		SHELLEXECUTEINFO ShExecInfo = { 0 };
 		ShExecInfo.cbSize = sizeof(SHELLEXECUTEINFO);
 		ShExecInfo.fMask = SEE_MASK_NOCLOSEPROCESS;
@@ -60,7 +64,28 @@ void VideoCutThread::startWoker() {
 		ShExecInfo.hInstApp = NULL;
 		ShellExecuteEx(&ShExecInfo);
 		WaitForSingleObject(ShExecInfo.hProcess, INFINITE);
+#endif
+        QString para = QString("/c ffmpeg -y -ss %1 -t %2 -i %3 -codec copy %4").arg(it->first,duration,video_path,out);
+        //构造参数
+        QProcess p(nullptr);
+        QStringList arg;
+        arg.append("-y");
+        arg.append("-ss");
+        arg.append(it->first);
+        arg.append("-t");
+        arg.append(duration);
+        arg.append("-i");
+        arg.append(video_path);
+        arg.append("-codec");
+        arg.append("copy");
+        arg.append(out);
+        //执行命令
+        p.start("ffmpeg",arg);
+        p.waitForFinished();
+        qDebug()<<QString::fromLocal8Bit(p.readAllStandardError());
 
+
+        qDebug()<<i;
 		emit progress(i);
 	}
 }

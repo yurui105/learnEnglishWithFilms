@@ -16,7 +16,7 @@ MainWindow::MainWindow(QWidget *parent)
     timer = new QTimer(this);
     connect(this,SIGNAL(setMedia(QString)),this,SLOT(loadMedia(QString)));
     connect(timer,&QTimer::timeout,this,&MainWindow::timeout_update);
-    connect(ui->volumeSlider,SIGNAL(valueChanged(int)),this,SIGNAL(on_horizontalSlider_Volume_valueChanged(int)));
+    connect(ui->volumeSlider,SIGNAL(valueChanged(int)),this,SLOT(on_horizontalSlider_Volume_valueChanged(int)));
     connect(ui->pushButton_play,&QPushButton::clicked,this,&MainWindow::on_pushButton_play_clicked);
     connect(ui->pushButton_pause,&QPushButton::clicked,this,&MainWindow::on_pushButton_pause_clicked);
     connect(ui->pushButton_reset,&QPushButton::clicked,this,&MainWindow::on_pushButton_reset_clicked);
@@ -28,9 +28,9 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::set_project_status(bool status)
+void MainWindow::set_project_status(bool status=false)
 {
-    isNewProject=status;
+    isNewProject=false;
 }
 
 void MainWindow::openThreadSlot()
@@ -77,6 +77,8 @@ void MainWindow::process(int a)
 
 void MainWindow::on_word_table_click(int x, int y)
 {
+    play_time.clear();
+    current=0;
     qDebug() << "双击表格:" << x << ":" << y;
     //获取表格内容
     QVector<QString> time;
@@ -101,17 +103,17 @@ void MainWindow::on_word_table_click(int x, int y)
         std::string::const_iterator itBegin = temp.begin();
         std::string::const_iterator itEnd = temp.end();
 
-        QVector<QString> time;
+        QVector<QString> time_temp;
 
         while (regex_search(itBegin,itEnd, result, pattern)) {
-            time.push_back(QString::fromStdString(result[0]));
+            time_temp.push_back(QString::fromStdString(result[0]));
             itBegin = result[0].second;
         }//while
-        play_time.push_back(time[0].replace(":","")+"-"+time[1].replace(":","")+".mp4");
+        play_time.push_back(time_temp[0].replace(":","")+"-"+time_temp[1].replace(":","")+".mp4");
     }
     //设置播放的文件
-    qDebug()<<project_path+"/data/"+play_time[current%play_time.size()]+".mp4";
-    emit setMedia(project_path+"/data/"+play_time[current%play_time.size()]+".mp4");
+    qDebug()<<project_path+"/data/"+play_time[current%play_time.size()];
+    emit setMedia(project_path+"/data/"+play_time[current%play_time.size()]);
     current++;
 
 }
@@ -130,7 +132,7 @@ void MainWindow::init_subtitle()
         //如果该项目为已经创建的项目，则不进行视频剪切
         emit startThread_signal();
     }
-
+    loadMedia("../bin/Im.Thinking.of.Ending.Things.2020.1080p/Im.Thinking.of.Ending.Things.2020.mkv");
 }
 
 void MainWindow::setWordsTable()
@@ -273,11 +275,11 @@ void MainWindow::timeout_update()
     ui->playerSlider->setValue(pos);
     // 设置时间
     ui->label->setText(QString("%1").arg(pos));
-
+    qDebug()<<"timeout_update:"<<pos<<"/"<<current_video_duration;
     //判断当前视频是否播放完毕，是的话则播放下一个视频
-    if(pos==current_video_duration-1){
-        qDebug()<<project_path+"/data/"+play_time[current%play_time.size()]+".mp4";
-        emit setMedia(project_path+"/data/"+play_time[current%play_time.size()]+".mp4");
+    if(pos==0){
+        qDebug()<<project_path+"/data/"+play_time[current%play_time.size()];
+        loadMedia(project_path+"/data/"+play_time[current%play_time.size()]);
         current++;
     }
 }
@@ -303,5 +305,6 @@ bool MainWindow::eventFilter(QObject *obj, QEvent *event)
 }
 void MainWindow::on_horizontalSlider_Volume_valueChanged(int value)
 {
-     ui->openGLWidget->setVolume(float(value/10.0));
+    qDebug()<<"音量："<<value;
+     ui->openGLWidget->setVolume(float(value));
 }
