@@ -30,6 +30,9 @@ MainWindow::~MainWindow()
 
 void MainWindow::set_project_status(bool status=false)
 {
+    //已经存在的项目，不需要剪辑，隐藏剪辑进度条
+    ui->progressBar->hide();
+    ui->progress_label->hide();
     isNewProject=false;
 }
 
@@ -132,7 +135,7 @@ void MainWindow::init_subtitle()
         //如果该项目为已经创建的项目，则不进行视频剪切
         emit startThread_signal();
     }
-    loadMedia("../bin/Im.Thinking.of.Ending.Things.2020.1080p/Im.Thinking.of.Ending.Things.2020.mkv");
+    loadMedia(video_path);
 }
 
 void MainWindow::setWordsTable()
