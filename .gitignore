@@ -77,3 +77,6 @@ Thumbs.db
 *.dll
 *.exe
 
+build*
+bin/test_movie
+/test_movie

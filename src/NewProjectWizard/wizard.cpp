@@ -1,6 +1,6 @@
 #include "NewProjectWizard/wizard.h"
 #include <QDebug>
-
+#include<QMessageBox>
 NewProjectWizard::NewProjectWizard()
 {
     //初始化向导界面,加入列表中
@@ -80,15 +80,19 @@ void NewProjectWizard::savaData()
 
     json_document.setObject(projectData);
 
-    bool created = FileOperate::createFile(project_name,"json",project_path);
+    bool created = FileOperate::createFile(project_name,"lef",project_path);
     if(created){
-        QFile file(project_path+"/"+project_name+"."+"json");
+        QFile file(project_path+"/"+project_name+".lef");
         if(file.open(QIODevice::ReadWrite)){
             file.write(json_document.toJson());
             file.close();
         }
+        qDebug()<<"复制字幕文件"<<subtittle_file_path.filePath<<"到"<<"\t"+project_path+"/+subtitle.srt";
+        QFile::copy(subtittle_file_path.filePath,project_path+"/+subtitle.srt");
+
     }else{
         // TO-DO
+        QMessageBox::warning(nullptr,"无法创建文件","无法创建文件，请检查文件路径？",QMessageBox::Yes);
     }
 }
 
@@ -110,5 +114,5 @@ void NewProjectWizard::showFitsrPage()
 
 NewProjectWizard::~NewProjectWizard()
 {
-    delete current;
+//    delete current;
 }

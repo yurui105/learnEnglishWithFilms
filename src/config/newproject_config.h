@@ -1,3 +1,6 @@
+#ifndef NEWPROJECT_CONFIG_H
+#define NEWPROJECT_CONFIG_H
+
 #include<QString>
 #include<QFile>
 #include<QDir>
@@ -5,3 +8,4 @@
 
 const QString DEFAULT_PROJECT_PATH = QDir::homePath();
 const QString DEFAULT_PROJECT_NAME = "MyProject";
+#endif

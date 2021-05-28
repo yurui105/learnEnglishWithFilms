@@ -4,11 +4,15 @@
 #include<QStringList>
 #include<QDir>
 #include<QTime>
+#include<cstdlib>
+#include<Windows.h>
+#include<string>
 
 void VideoCutThread::closeThread()
 {
 	isStop = true;
 }
+
 
 VideoCutThread::VideoCutThread(QObject* parent) :
 	QObject(parent),
@@ -26,41 +30,37 @@ void VideoCutThread::startWoker() {
 		dir.mkdir(data_path);
 	}
 	QString program = "E:/learnEnglishWithFilms/bin/ffmpeg.exe";
-	for (auto it : time) {
 
-		QTime begin_time = QTime::fromString(it.first, "hh:mm:ss");
-		QTime end_time = QTime::fromString(it.first, "hh:mm:ss");
-		QTime m_time;
-		m_time.setHMS(0, 0, 0, 0);
-		m_time.addSecs(end_time.secsTo(begin_time));
-		QString time_long = m_time.toString("hh:mm:ss");
+	int i = 1;
+	for (QVector<std::pair<QString, QString>>::iterator it = time.begin(); it != time.end(); it++, i++) {
+		//计算剪辑时长
+		int s = QTime().fromString(it->first, "hh:mm:ss").secsTo(QTime().fromString(it->second, "hh:mm:ss"));
+		QTime temp = QTime(0, 0, 0).addSecs(s+2);
+		QString duration = temp.toString("hh:mm:ss");
 
-		QProcess po(0);
-		qDebug() << it.first << "\t" << it.second;
-		QStringList argu;
-
-		argu.append("-i");
-		argu.append(this->video_path);
-		argu.append("-ss");
-		argu.append(it.first);
-		argu.append("-to");
-		argu.append(it.second);
-		argu.append("-acodec");
-		argu.append("copy ");
-
-		//argu.append("-vcodec");
-		//argu.append("copy ");
+		//组合文件名
+		QString first = it->first;
+		first = first.replace(QString(":"), QString(""));
+		QString second = it->second;
+		second = second.replace(QString(":"), QString(""));
+		QString out = data_path + first + "-" + second + ".mp4";
 		
-		
-		QString first = it.first.replace(QString(":"), QString(""));
-		QString second = it.second.replace(QString(":"), QString(""));
-		argu.append(data_path+first+"-"+second+".mp4");
 
-		po.start(program,argu);
-		po.waitForFinished();
-		QString result = po.readAllStandardOutput();
+		QString para = QString("/c ffmpeg -y -ss %1 -t %2 -i %3 -codec copy %4").arg(it->first,duration,video_path,out);
 
-		qDebug() << "error:\t" << po.readAllStandardError();
-		qDebug() <<"result:\t" <<result;
+		SHELLEXECUTEINFO ShExecInfo = { 0 };
+		ShExecInfo.cbSize = sizeof(SHELLEXECUTEINFO);
+		ShExecInfo.fMask = SEE_MASK_NOCLOSEPROCESS;
+		ShExecInfo.hwnd = NULL;
+		ShExecInfo.lpVerb = (LPCWSTR)L"open";
+		ShExecInfo.lpFile = (LPCWSTR)L"cmd";
+		ShExecInfo.lpParameters = (LPCWSTR)para.unicode();
+		ShExecInfo.lpDirectory = NULL;
+		ShExecInfo.nShow = SW_HIDE;
+		ShExecInfo.hInstApp = NULL;
+		ShellExecuteEx(&ShExecInfo);
+		WaitForSingleObject(ShExecInfo.hProcess, INFINITE);
+
+		emit progress(i);
 	}
 }
